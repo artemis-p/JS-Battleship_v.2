@@ -15,9 +15,9 @@ var view = {
     }
 }
 
-view.displayMiss("00");
-view.displayHit("02");
-view.displayMessage("tap, tap, tap");
+// view.displayMiss("00");
+// view.displayHit("02");
+// view.displayMessage("tap, tap, tap");
 
 
 // model is an object and the properties give us the state of the game
@@ -63,3 +63,39 @@ var model = {
 };
 
 
+model.fire("12");
+model.fire("11");
+model.fire("10");
+
+var controller = {
+    guesses: 0,
+
+    processGuess: function(guess) {
+
+    }
+};
+
+function parseGuess(guess) {
+
+    var alphabet = ["A", "B", "C", "D", "E", "F", "G"];
+
+    if (guess === null || guess.length !== 2 ) {
+        alert("Oops, please enter a letter and a number on the board.");
+    } else {
+        var firstChar = guess.charAt(0);
+        var row = aplhabet.indexOf(firstChar);
+        var column = guess.charAt(1);
+
+        if(isNaN(row) || isNaN(column)) {
+            alert("Oops, that isn't on the board.");
+        } else if (row < 0 || row >= model.boardSize) {
+            alert("Oops, that's off the board!");
+        } else {
+            return row + column;
+        }
+    }
+    return null;
+
+}
+
+// parseGuess("");
