@@ -63,17 +63,28 @@ var model = {
 };
 
 
-model.fire("12");
-model.fire("11");
-model.fire("10");
+// model.fire("12");
+// model.fire("11");
+// model.fire("10");
 
 var controller = {
     guesses: 0,
 
     processGuess: function(guess) {
-
+        var location = parseGuess(guess);
+        if (location) {
+            this.guesses++;
+            var hit = model.fire(location);
+            if (hit && model.shipsSunk === model.numShips) {
+                view.displayMessage("You sank all my battleships, in " + this.guesses + " guesses");
+            }
+        }
     }
 };
+
+
+controller.processGuess("A0");
+controller.processGuess("C6");
 
 function parseGuess(guess) {
 
@@ -97,5 +108,6 @@ function parseGuess(guess) {
     return null;
 
 }
+
 
 // parseGuess("");
