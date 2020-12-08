@@ -83,9 +83,6 @@ var controller = {
 };
 
 
-controller.processGuess("A0");
-controller.processGuess("C6");
-
 function parseGuess(guess) {
 
     var alphabet = ["A", "B", "C", "D", "E", "F", "G"];
@@ -94,7 +91,7 @@ function parseGuess(guess) {
         alert("Oops, please enter a letter and a number on the board.");
     } else {
         var firstChar = guess.charAt(0);
-        var row = aplhabet.indexOf(firstChar);
+        var row = alphabet.indexOf(firstChar);
         var column = guess.charAt(1);
 
         if(isNaN(row) || isNaN(column)) {
@@ -109,5 +106,18 @@ function parseGuess(guess) {
 
 }
 
+function init() {
+    var fireButton = document.getElementById("fireButton");
+    fireButton.onclick = handleFireButton;
+}
+
+function handleFireButton() {
+    var guessInput = document.getElementById("guessInput");
+    var guess = guessInput.value;
+    controller.processGuess(guess);
+    guessInput.value = "";
+}
+
+window.onload = init;
 
 // parseGuess("");
